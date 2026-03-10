@@ -62,7 +62,7 @@ function getUsername() {
   return usernameInput.value.trim() || "anon"
 }
 
-const ws = new WebSocket(`ws://${location.host}`)
+const ws = new WebSocket(`wss://${location.host}`)
 
 ws.addEventListener("open", () => {
   setConnected(true)
