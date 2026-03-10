@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WS Chat workshop</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar" aria-label="Online gebruikers">
+        <header class="sidebarHeader">
+          <h2 class="sidebarTitle">online</h2>
+        </header>
+        <nav aria-label="Gebruikerslijst">
+          <ul class="userList" id="user-list" role="list"></ul>
+        </nav>
+        <footer class="sidebarFooter">
+          <p class="userCount" id="user-count" aria-live="polite">
+            0 gebruikers
+          </p>
+        </footer>
+      </aside>
+      <main class="chat">
+        <header class="chatHeader">
+          <div class="status" aria-live="polite">
+            <span
+              class="statusDot offline"
+              id="status-dot"
+              aria-hidden="true"
+            ></span>
+            <span class="statusLabel" id="status-text">connecting...</span>
+          </div>
+          <h1 class="chatTitle">WebSocket Chat</h1>
+        </header>
+
+        <section class="messages" aria-label="Berichten" aria-live="polite">
+          <ol class="messageList" id="messages" role="list">
+            <li class="message system">connecting to serverr...</li>
+          </ol>
+        </section>
+
+        <footer class="chatFooter">
+          <form class="inputBar" id="input-form" novalidate>
+            <label class="sr-only" for="username-input">uw naam</label>
+            <input
+              class="usernameInput"
+              id="username-input"
+              type="text"
+              placeholder="Naam"
+              maxlength="20"
+              value="Student"
+              autocomplete="nickname"
+            />
+            <label class="sr-only" for="message-input">bericht</label>
+            <input
+              class="messageInput"
+              id="message-input"
+              type="text"
+              placeholder="type een bericht..."
+              maxlength="500"
+              disabled
+              autocomplete="off"
+            />
+            <button class="sendBtn" id="send-btn" type="submit" disabled>
+              send
+            </button>
+          </form>
+        </footer>
+      </main>
+    </div>
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
