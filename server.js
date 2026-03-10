@@ -59,6 +59,8 @@ wss.on("connection", (ws) => {
     
     console.log(`${ws.username} disconnected`)
   })
+
+
   ws.on("error", (error)=> {
     console.error(error.message)
   })
@@ -109,7 +111,10 @@ wss.on("connection", (ws) => {
 //
 // Stap 4: bij close: users.delete(ws) + broadcastUsers()
 
+///belangrijk, VERANDER PORT
 
-httpServer.listen(3000, () => {
+const PORT = process.env.PORT || 3000
+
+httpServer.listen(PORT, () => {
   console.log("http://localhost:3000");
 });
