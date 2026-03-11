@@ -63,8 +63,8 @@ function getUsername() {
 }
 
 
-//important, change to WSS
-const ws = new WebSocket(`ws://${location.host}`)
+//important
+const ws = new WebSocket(`wss://${location.host}`)
 
 ws.addEventListener("open", () => {
   setConnected(true)
