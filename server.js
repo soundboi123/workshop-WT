@@ -26,6 +26,7 @@ const httpServer = createServer(async (req, res) => {
 });
 
 const wss = new WebSocketServer({server: httpServer })
+
 const users = new Map();
 
 function broadcastUSers(){
@@ -54,6 +55,8 @@ wss.on("connection", (ws) => {
     console.log(parsed)
     ws.username = parsed.sender
     if (parsed.type === "join"){
+
+      
       //hier komt code voor broadcast
       users.set(ws, parsed.sender)
       broadcastUSers()
@@ -71,8 +74,11 @@ wss.on("connection", (ws) => {
     }
   })
   ws.on("close", () => {
+    users.delete(ws)
+    broadcastUSers()
     
     console.log(`${ws.username} disconnected`)
+    
   })
 
 
