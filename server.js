@@ -26,6 +26,20 @@ const httpServer = createServer(async (req, res) => {
 });
 
 const wss = new WebSocketServer({server: httpServer })
+const users = new Map();
+
+function broadcastUSers(){
+  const payload = JSON.stringify({
+    type: "users",
+    users: Array.from(users.values()),
+
+  });
+  wss.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) client.send(payload)
+  })
+}
+
+
 
 // todo 1: maak een websocket server aan
 // Koppel de Websocket server aan de httpServer zodat ze allebei
@@ -41,7 +55,8 @@ wss.on("connection", (ws) => {
     ws.username = parsed.sender
     if (parsed.type === "join"){
       //hier komt code voor broadcast
-      
+      users.set(ws, parsed.sender)
+      broadcastUSers()
       console.log(`joined ${parsed.sender}`)
       
     } else if (parsed.type === "message"){
